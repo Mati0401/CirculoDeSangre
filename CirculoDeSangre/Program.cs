@@ -15,7 +15,20 @@ namespace CirculoDeSangre
             socio.SociosYaRegistrados();
 
             Menu menu = new Menu();
-            menu.IniciarPrograma(socio);
+
+            Peticion peticion = new Peticion();
+
+            Donacion donacion = new Donacion();
+
+            BancoDeSangre bds = new BancoDeSangre();
+            bds.BancoDeSangreYaRegistrados();
+
+            SocioAsignado sa = new SocioAsignado();
+
+            ValidarSocio vs = new ValidarSocio();
+
+            menu.IniciarPrograma(socio, socio.ListaDeSocios, bds, peticion, donacion, peticion.ListaDePeticiones, sa, menu, vs, sa.SociosAsignados);
+
         }
     }
 }
