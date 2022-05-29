@@ -40,76 +40,31 @@ namespace CirculoDeSangre
         }
 
         //REGISTRAR DONACION
-        public void RegistrarDonacion(List<SocioAsignado> SociosAsignados, List<Peticion> ListaDePeticiones, List<Socio> ListaDeSocios)
+        public void RegistrarDonacion(List<SocioAsignado> SociosAsignados, List<Peticion> ListaDePeticiones, 
+            List<Socio> ListaDeSocios, ValidarDonacion vd)
         {
-            VrdFecha();
-            void VrdFecha()
+            Console.Write("Ingrese el número de petición al que corresponde la donación: ");
+            string stringnumPeticion = Console.ReadLine();
+            numPeticion = vd.ValidarNumeroDePeticion(stringnumPeticion, ListaDePeticiones);
+
+            Console.Write("Ingrese la fecha en que se realizó la donacion con el formato **/**/****: ");
+            string stringfechaDeDonacion = Console.ReadLine();
+            fechaDeDonacion = vd.ValidarFechaDeDonacion(stringfechaDeDonacion, ListaDePeticiones, numPeticion);
+
+            Console.Write("Ingrese el dni del donante: ");
+            string stringddni = Console.ReadLine();
+            ddni = vd.ValidarDDni(stringddni, SociosAsignados);
+
+            foreach (var item in SociosAsignados)
             {
-                try
+                if(item.AsDni == ddni)
                 {
-                    Console.Write("Ingrese la fecha en que se realizó la donacion con el formato **/**/****: ");
-                    fechaDeDonacion = Convert.ToDateTime(Console.ReadLine());
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Formato Incorrecto.");
-                    VrdFecha();
+                    nombreApellido = item.AsNombre + " " + item.AsApellido;
                 }
             }
-            VrdDni();
-            void VrdDni()
-            {
-                bool coincide = false;
-                try
-                {
-                    Console.Write("Ingrese el dni del donante: ");
-                    ddni = Convert.ToInt32(Console.ReadLine());
-                    foreach (var item in SociosAsignados)
-                    {
-                        if(ddni == item.AsDni)
-                        {
-                            nombreApellido = item.AsNombre + " " +  item.AsApellido;
-                            coincide = true;
-                        }
-                    }
-                    if (coincide == false)
-                    {
-                        Console.WriteLine("El DNI ingresado no corresponde al de ningún socio en condición de donar.\n");
-                        VrdDni();
-                    }
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Formato Incorrecto.");
-                    VrdDni();
-                }
-            }
-            VrdNumPeticion();
-            void VrdNumPeticion()
-            {
-                try
-                {
-                    Console.Write("Ingrese el número de petición al que corresponde la donación: ");
-                    numPeticion = Convert.ToInt32(Console.ReadLine());
-                    foreach (var item in ListaDePeticiones)
-                    {
-                        if (numPeticion == item.Numero)
-                        {
-                            CargarDonacion();
-                        }
-                        else
-                        {
-                            Console.WriteLine("El numero de petición ingresado no corresponde a ninguna petición.\n");
-                            VrdNumPeticion();
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Formato Incorrecto.");
-                    VrdNumPeticion();
-                }
-            }
+
+            Console.WriteLine("\nLa donación se registró exitosamente.");
+            CargarDonacion();
 
             //ACTUALIZAR DATOS DEL SOCIO
             foreach (var item in ListaDeSocios)

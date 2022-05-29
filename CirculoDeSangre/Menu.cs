@@ -9,7 +9,10 @@ namespace CirculoDeSangre
     public class Menu
     {
         int k = 9;
-        public void IniciarPrograma(Socio socio, List<Socio>ListaDeSocios, BancoDeSangre bds, Peticion peticion, Donacion donacion, List<Peticion> ListaDePeticiones, SocioAsignado sa, Menu menu, ValidarSocio vs, List<SocioAsignado>SociosAsignados)
+        public void IniciarPrograma(Socio socio, List<Socio>ListaDeSocios, BancoDeSangre bds, 
+            Peticion peticion, Donacion donacion, List<Peticion> ListaDePeticiones, 
+            SocioAsignado sa, Menu menu, ValidarSocio vs, List<SocioAsignado>SociosAsignados,
+            ValidarPeticion vp, ValidarDonacion vd)
         {
             do
             {
@@ -46,7 +49,8 @@ namespace CirculoDeSangre
                                 break;
 
                             case 3:
-                                bds.IniciarSesionBds(peticion, sa, donacion, ListaDeSocios, ListaDePeticiones, menu, SociosAsignados);
+                                bds.IniciarSesionBds(peticion, sa, donacion, ListaDeSocios, ListaDePeticiones, menu, 
+                                    SociosAsignados, vp, vd);
                                 break;
 
                             //MUESTRA LISTADOS (DE PRUEBA)

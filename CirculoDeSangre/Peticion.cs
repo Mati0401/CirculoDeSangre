@@ -45,83 +45,44 @@ namespace CirculoDeSangre
         }
 
         //REGISTRAR DATOS DE LA PETICION
-        public void RegistrarPeticion(SocioAsignado sa, List<Socio> ListaDeSocios, List<Peticion> ListaDePeticiones, Peticion peticion)
+        public void RegistrarPeticion(SocioAsignado sa, List<Socio> ListaDeSocios, List<Peticion> ListaDePeticiones, 
+            Peticion peticion, ValidarPeticion vp)
         {
-            Vfecha();
-            void Vfecha(){
-                try
-                {
-                    Console.Write("Ingrese la fecha con el formato **/**/****: ");
-                    fechaDePeticion = Convert.ToDateTime(Console.ReadLine());
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Formato Incorrecto.");
-                    Vfecha();
-                }
-            }
-            VfechaLimite();
-            void VfechaLimite(){
-                try
-                {
-                    Console.Write("Ingrese la fecha limite con el formato **/**/****: ");
-                    fechaLimite = Convert.ToDateTime(Console.ReadLine());
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Formato Incorrecto.");
-                    VfechaLimite();
-                }
-            }
-            VcantDonantes();
-            void VcantDonantes()
+
+            Console.Write("Ingrese la fecha con el formato **/**/****: ");
+            string stringfechaDePeticion = Console.ReadLine();
+            fechaDePeticion = vp.ValidarFechaDePeticion(stringfechaDePeticion);
+
+            Console.Write("Ingrese la fecha limite con el formato **/**/****: ");
+            string stringfechaLimite = Console.ReadLine();
+            fechaLimite = vp.ValidarFechaLimite(stringfechaLimite, fechaDePeticion);
+    
+            Console.Write("Ingrese la cantidad de donantes (en numero): ");
+            string stringcantDonantes = Console.ReadLine();
+            cantDonantes = vp.ValidarCantidadDeDonantes(stringcantDonantes);
+
+            Console.Write("Ingrese el grupo en mayuscula (A, B, AB o 0): ");
+            grupo = Console.ReadLine();
+            grupo = vp.ValidarGrupo(grupo);
+
+            Console.Write("Ingrese el factor (+ o -): ");
+            factor = Console.ReadLine();
+            factor = vp.ValidarFactor(factor);
+
+            //SI EL FACTOR ES + DESCARTA LA PETICION Y SI ES - CARGA LA PETICION Y LE ASIGNA LOS SOCIOS A DONAR.
+            if (factor == "+")
             {
-                try
-                {
-                    Console.Write("Ingrese la cantidad de donantes: ");
-                    cantDonantes = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Formato Incorrecto.");
-                    VcantDonantes();
-                }
+                Console.WriteLine("\nLa peticion no se puede realizar porque el circulo solo tiene sangre RH Negativo.");
             }
-            Vgrupo();
-            void Vgrupo() 
+            else
             {
-                Console.Write("Ingrese el grupo en mayuscula: ");
-                grupo = Console.ReadLine();
-                if (grupo != "A" && grupo != "B" && grupo != "0" && grupo != "AB")
-                {
-                    Vgrupo();
-                }
+                Console.WriteLine("\nLa peticion se registró exitosamente.");
+                CargarPeticion();
+                sa.AsignarSocios(ListaDeSocios, ListaDePeticiones, peticion);
             }
-            Vfactor();
-            void Vfactor()
-            {
-                Console.Write("Ingrese el factor (+ o -): ");
-                factor = Console.ReadLine();
-                if (factor == "+")
-                {
-                    Console.WriteLine("El circulo solo tiene sangre rh negativo.");
-                }
-                else if (factor == "-")
-                {
-                    Console.Clear();
-                    Console.WriteLine("Solicitud registrada.\n");
-                }
-                else
-                {
-                    Vfactor();
-                }
-            }
-            
-            CargarPeticion();
-            sa.AsignarSocios(ListaDeSocios, ListaDePeticiones, peticion);
         }
         
-        //CARGAR LOS DATOS EN LA LISTA
+        //CARGAR LOS DATOS DE LA PETICION EN LA LISTA
         public void CargarPeticion()
         {
             numero++;

@@ -62,7 +62,9 @@ namespace CirculoDeSangre
 
         //LOGUEAR UN BANCO CON EMAIL Y CONTRASEÑA
         string isEmail;
-        public void IniciarSesionBds(Peticion peticion, SocioAsignado sa, Donacion donacion, List<Socio> ListaDeSocios, List<Peticion> ListaDePeticiones, Menu menu, List<SocioAsignado>SociosAsignados)
+        public void IniciarSesionBds(Peticion peticion, SocioAsignado sa, Donacion donacion, 
+            List<Socio> ListaDeSocios, List<Peticion> ListaDePeticiones, Menu menu, 
+            List<SocioAsignado>SociosAsignados, ValidarPeticion vp, ValidarDonacion vd)
         {
             Console.Clear();
             bool emailExiste, usuarioLogueado, contraCorrecta;
@@ -129,14 +131,14 @@ namespace CirculoDeSangre
                 else if (p == "1")
                 {
                     Console.Clear();
-                    peticion.RegistrarPeticion(sa, ListaDeSocios, ListaDePeticiones, peticion);
+                    peticion.RegistrarPeticion(sa, ListaDeSocios, ListaDePeticiones, peticion, vp);
                     menu.KeyToReturn();
                     volver = true;
                 }
                 else if (p == "2")
                 {
                     Console.Clear();
-                    donacion.RegistrarDonacion(SociosAsignados, ListaDePeticiones, ListaDeSocios);
+                    donacion.RegistrarDonacion(SociosAsignados, ListaDePeticiones, ListaDeSocios, vd);
                     menu.KeyToReturn();
                     volver = true;
                 }

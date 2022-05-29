@@ -55,7 +55,14 @@ namespace CirculoDeSangre
         public DateTime ValidarFechaDeNacimiento(string stringfechaDeNacimiento)
         {
             //Solo acepta el formato dd/mm/aaaa.
+            //La persona no puede tener mas de 120 años, ni haber naciedo en el futuro.
             while (!Regex.Match(stringfechaDeNacimiento, @"^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$").Success)
+            {
+                Console.Write("Ingrese nuevamente la fecha de nacimiento: ");
+                stringfechaDeNacimiento = Console.ReadLine();
+            }
+            while (Convert.ToDateTime(stringfechaDeNacimiento).Ticks <= (new DateTime(1902,01,01)).Ticks 
+                || Convert.ToDateTime(stringfechaDeNacimiento).Ticks > (DateTime.Today).Ticks)
             {
                 Console.Write("Ingrese nuevamente la fecha de nacimiento: ");
                 stringfechaDeNacimiento = Console.ReadLine();

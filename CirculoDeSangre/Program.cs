@@ -26,8 +26,11 @@ namespace CirculoDeSangre
             SocioAsignado sa = new SocioAsignado();
 
             ValidarSocio vs = new ValidarSocio();
+            ValidarPeticion vp = new ValidarPeticion();
+            ValidarDonacion vd = new ValidarDonacion();
 
-            menu.IniciarPrograma(socio, socio.ListaDeSocios, bds, peticion, donacion, peticion.ListaDePeticiones, sa, menu, vs, sa.SociosAsignados);
+            menu.IniciarPrograma(socio, socio.ListaDeSocios, bds, peticion, donacion, peticion.ListaDePeticiones, 
+                sa, menu, vs, sa.SociosAsignados, vp, vd);
 
         }
     }
