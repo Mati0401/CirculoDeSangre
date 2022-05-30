@@ -25,6 +25,7 @@ namespace CirculoDeSangre
                         Console.WriteLine("1. Si desesa Iniciar Sesion como socio.");
                         Console.WriteLine("2. Si necesita Registrarse como socio.");
                         Console.WriteLine("3. Si desea Iniciar Sesion como Banco de Sangre.");
+                        Console.WriteLine("4. Si desea Ingresar como Administrador.");
                         Console.WriteLine("\n0. Para Cerrar.\n");
                         int n = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine();
@@ -53,8 +54,7 @@ namespace CirculoDeSangre
                                     SociosAsignados, vp, vd);
                                 break;
 
-                            //MUESTRA LISTADOS (DE PRUEBA)
-                            case 8:
+                            case 4:
                                 Console.Clear();
                                 Vopc();
                                 void Vopc()
@@ -64,18 +64,21 @@ namespace CirculoDeSangre
                                     Console.WriteLine("2. Para Mostrar Listado de Peticiones.");
                                     Console.WriteLine("3. Para Mostrar Listado de Donaciones.");
                                     Console.WriteLine("4. Para Mostrar Listado de Bancos de Sangre.");
+                                    Console.WriteLine("\n9. Para Volver al Menú");
                                     int m = Convert.ToInt32(Console.ReadLine());
                                     if (m == 1)
                                     {
                                         Console.Clear();
                                         socio.MostrarListado();
                                         KeyToReturn();
+                                        Vopc();
                                     }
                                     else if (m == 2)
                                     {
                                         Console.Clear();
                                         peticion.MostrarPeticiones();
                                         KeyToReturn();
+                                        Vopc();
 
                                     }
                                     else if (m == 3)
@@ -83,16 +86,25 @@ namespace CirculoDeSangre
                                         Console.Clear();
                                         donacion.MostrarListaDeDonaciones();
                                         KeyToReturn();
+                                        Vopc();
                                     }
                                     else if (m == 4)
                                     {
                                         Console.Clear();
                                         bds.MostrarListaDeBancos();
                                         KeyToReturn();
+                                        Vopc();
+                                    }
+                                    else if (m == 9)
+                                    {
+                                        Console.Clear();
+                                        k = 9;
                                     }
                                     else
                                     {
+                                        Console.Clear();
                                         Console.WriteLine("Opcion inválida.\n");
+                                        KeyToReturn();
                                         Vopc();
                                     }
                                 }

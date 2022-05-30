@@ -17,6 +17,7 @@ namespace CirculoDeSangre
         private DateTime fechaDeNacimiento;
         private string domicilio;
         private string localidad;
+        private string telefono;
         private string categoria; // activo | pasivo
         private bool enfermedad;
         private bool tomaMedicacion;
@@ -27,6 +28,7 @@ namespace CirculoDeSangre
         private string condicion; // disponible | nodisponible
         private int cantDeDonaciones;
 
+
         //CAMPOS ENCAPSULADOS 
 
         public string Nombre { get => nombre; set => nombre = value; }
@@ -36,6 +38,7 @@ namespace CirculoDeSangre
         public DateTime FechaDeNacimiento { get => fechaDeNacimiento; set => fechaDeNacimiento = value; }
         public string Domicilio { get => domicilio; set => domicilio = value; }
         public string Localidad { get => localidad; set => localidad = value; }
+        public string Telefono { get => telefono; set => telefono = value; }
         public string Categoria { get => categoria; set => categoria = value; }
         public bool Enfermedad { get => enfermedad; set => enfermedad = value; }
         public bool TomaMedicacion { get => tomaMedicacion; set => tomaMedicacion = value; }
@@ -64,6 +67,7 @@ namespace CirculoDeSangre
             Console.WriteLine("Grupo Sanguineo: " + GrupoSanguineo);
             Console.WriteLine("Fecha de nacimiento: " + FechaDeNacimiento.ToShortDateString());
             Console.WriteLine("Domicilio y localidad: " + Domicilio + ", " + Localidad);
+            Console.WriteLine("Telefono: " + Telefono);
             Console.WriteLine("Enfermedad, toma medicacion y medicamento: " + Enfermedad + ", " + TomaMedicacion + ", " + Medicamento);
             Console.WriteLine("Email y contraseña: " + Email + ", " + Contraseña);
             Console.WriteLine("Categoria: " + Categoria);
@@ -85,6 +89,7 @@ namespace CirculoDeSangre
                 FechaDeNacimiento = new DateTime(1940, 09, 15),
                 Domicilio = "Roca 767",
                 Localidad = "San Francisco",
+                Telefono = "3564-329865",
                 Enfermedad = false,
                 TomaMedicacion = false,
                 Medicamento = "no consume ningun medicamento",
@@ -105,6 +110,7 @@ namespace CirculoDeSangre
                 FechaDeNacimiento = new DateTime(1968, 09, 08),
                 Domicilio = "Cabrera 1678",
                 Localidad = "San Francisco",
+                Telefono = "3564-224587",
                 Enfermedad = true,
                 TomaMedicacion = true,
                 Medicamento = "glimepirida",
@@ -125,6 +131,7 @@ namespace CirculoDeSangre
                 FechaDeNacimiento = new DateTime(2001, 06, 21),
                 Domicilio = "Honduras 654",
                 Localidad = "San Francisco",
+                Telefono = "3564-553212",
                 Enfermedad = false,
                 TomaMedicacion = false,
                 Medicamento = "no consume ninguna medicacion",
@@ -145,6 +152,7 @@ namespace CirculoDeSangre
                 FechaDeNacimiento = new DateTime(1999, 05, 13),
                 Domicilio = "Italia 512",
                 Localidad = "San Francisco",
+                Telefono = "3564-111998",
                 Enfermedad = false,
                 TomaMedicacion = false,
                 Medicamento = "no consume ninguna medicacion",
@@ -165,6 +173,7 @@ namespace CirculoDeSangre
                 FechaDeNacimiento = new DateTime(1994, 01, 02),
                 Domicilio = "Roma 899",
                 Localidad = "San Francisco",
+                Telefono = "3564-775213",
                 Enfermedad = false,
                 TomaMedicacion = false,
                 Medicamento = "no consume ninguna medicacion",
@@ -216,6 +225,10 @@ namespace CirculoDeSangre
             Console.Write("Ingrese su localidad: ");
             localidad = Console.ReadLine();
             localidad = vs.ValidarLocalidad(localidad);
+
+            Console.Write("Ingrese su telefono con el formato ****-******: ");
+            telefono = Console.ReadLine();
+            telefono = vs.ValidarTelefono(telefono);
 
             Console.Write("Posee alguna enfermedad cronica (true o false): ");
             string stringenfermedad = Console.ReadLine();
@@ -304,6 +317,7 @@ namespace CirculoDeSangre
                 FechaDeNacimiento = fechaDeNacimiento,
                 Domicilio = domicilio,
                 Localidad = localidad,
+                Telefono = telefono,
                 Enfermedad = enfermedad,
                 TomaMedicacion = tomaMedicacion,
                 Medicamento = medicamento,
@@ -453,6 +467,7 @@ namespace CirculoDeSangre
                             Console.WriteLine("4. Cambiar Fecha de Nacimiento.");
                             Console.WriteLine("5. Cambiar Domicilio.");
                             Console.WriteLine("6. Cambiar Localidad.");
+                            Console.WriteLine("7. Cambiar Telefono.");
                             u = Console.ReadLine();
                             Console.Clear();
                             switch (u)
@@ -524,12 +539,23 @@ namespace CirculoDeSangre
                                     }
                                     Console.WriteLine("\nCambios guardados exitosamente.\n");
                                     break;
+                                case "7":
+                                    foreach (var item in listaDeSocios)
+                                    {
+                                        if (isEmail == item.Email)
+                                        {
+                                            Console.Write("Ingrese el nuevo numero de telefono: ");
+                                            item.Telefono = Console.ReadLine();
+                                        }
+                                    }
+                                    Console.WriteLine("\nCambios guardados exitosamente.\n");
+                                    break;
                                 default:
                                     Console.Clear();
                                     Console.WriteLine("ERROR: La opcion ingresada no es valida.\n");
                                     break;
                             }
-                        } while (u != "1" && u != "2" && u != "3" && u != "4" && u != "5" && u != "6");
+                        } while (u != "1" && u != "2" && u != "3" && u != "4" && u != "5" && u != "6" && u != "7");
                         break;
                     case "2":
                         Console.Clear();

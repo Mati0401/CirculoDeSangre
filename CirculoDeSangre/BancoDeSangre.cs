@@ -36,7 +36,7 @@ namespace CirculoDeSangre
         {
             Console.WriteLine("Nombre: " + Nombre);
             Console.WriteLine("Ubicacion: " + Ubicacion);
-            Console.WriteLine("Email: " + BdsEmail + "\tEmail: " + bdsContraseña);
+            Console.WriteLine("Email: " + BdsEmail + "\tContraseña: " + bdsContraseña);
         }
 
         //BANCOS REGISTRADOS PREVIAMENTE

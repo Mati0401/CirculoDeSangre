@@ -91,6 +91,17 @@ namespace CirculoDeSangre
             }
             return localidad;
         }
+        public string ValidarTelefono(string telefono)
+        {
+            //Solo acepta numeros.
+            //Formato 4 numeros - 6 numeros.
+            while (!Regex.Match(telefono, @"^\d{4}\-\d{6}$").Success)
+            {
+                Console.Write("Ingrese nuevamente el telefono: ");
+                telefono = Console.ReadLine();
+            }
+            return telefono;
+        }
         public bool ValidarEnfermedad(string stringenfermedad)
         {
             while(!Regex.Match(stringenfermedad, @"true|false").Success)
